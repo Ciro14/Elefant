@@ -25,6 +25,10 @@ public class Feature {
     private List<Activity> activateActivities = new LinkedList<Activity>();
     @Valid
     private List<Activity> deactivateActivities = new LinkedList<Activity>();
+    @Valid
+    private List<Softgoal> softgoals;
+    @Valid
+    private List<SoftgoalImpact> softgoalImpacts=new LinkedList<>();
 
 
     public String getName() {
