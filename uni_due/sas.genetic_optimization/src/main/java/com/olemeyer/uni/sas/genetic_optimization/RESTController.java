@@ -1,9 +1,13 @@
 package com.olemeyer.uni.sas.genetic_optimization;
 
+import com.google.gson.Gson;
 import com.olemeyer.uni.sas.genetic_optimization.config.Configuration;
+import com.olemeyer.uni.sas.genetic_optimization.execution.IndividualGenerator;
+import com.olemeyer.uni.sas.genetic_optimization.model.Individual;
 import com.olemeyer.uni.sas.genetic_optimization.model.SoftgoalTarget;
 import de.uni_due.paluno.elefant.featuremodel_extended.Feature;
 import de.uni_due.paluno.elefant.featuremodel_extended.Softgoal;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -18,8 +22,13 @@ import java.util.List;
 @RestController
 public class RESTController {
 
+    @Autowired
+    private IndividualGenerator individualGenerator;
+
     @RequestMapping(value = "/optimize")
     public Feature optimize(@Valid  OptimizationRequest request){
+        List<Individual> individuals=individualGenerator.generate(request.getModel(), request.getConfig().getIndividualCount());
+        System.out.println(new Gson().toJson(individuals));
         return null;
     }
 
