@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * @author
+ * @author Ole Meyer
  */
 @Component
 public class IndividualGenerator {
@@ -50,12 +50,18 @@ public class IndividualGenerator {
             for(RegulatoryGene rg:regulatoryGenes)softgoalToRegulatoryGeneMap.put(rg.getSoftgoal().getUuid(),rg);
             for(StructuralGene sg:structuralGenes){
                 for(SoftgoalImpact sgimpact:sg.getFeature().getSoftgoalImpacts()){
-                    
+                    softgoalToRegulatoryGeneMap.get(sgimpact.getUuid()).getConnectedStructuralGenes().add(sg);
                 }
             }
 
+            //Create individual
+            Individual individual=new Individual(regulatoryGenes,structuralGenes);
+
+            //Add individual to list
+            individuals.add(individual);
+
         }
-        return null;
+        return individuals;
     }
 
 
