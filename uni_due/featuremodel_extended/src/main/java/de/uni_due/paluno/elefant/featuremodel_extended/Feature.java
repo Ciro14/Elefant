@@ -89,4 +89,20 @@ public class Feature {
     public void setDeactivateActivities(List<Activity> deactivateActivities) {
         this.deactivateActivities = deactivateActivities;
     }
+
+    public List<Softgoal> getSoftgoals() {
+        return softgoals;
+    }
+
+    public void setSoftgoals(List<Softgoal> softgoals) {
+        this.softgoals = softgoals;
+    }
+
+    public List<SoftgoalImpact> getSoftgoalImpacts() {
+        return softgoalImpacts;
+    }
+
+    public void setSoftgoalImpacts(List<SoftgoalImpact> softgoalImpacts) {
+        this.softgoalImpacts = softgoalImpacts;
+    }
 }
