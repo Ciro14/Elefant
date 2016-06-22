@@ -24,3 +24,6 @@ This requests sends the model of the whole system to this service. This must be 
 ######update
 
 This request updates the model. The service try to figure out the steps needed for adapting the system and sends it back as response. Each step is a simple HTTP-Call. You have to provide the logic for adapting your system and take care that it can be called over this adresses. But for this example you don't need to do something, all things are pre configured.
+
+Let's send something to the service. If it is not running, start the service by executing the steps from above. Open the "init" request in postman and click "Send". You should get a response with the status code 200. If not, make sure that the port on that the sevice is listening and the port to that you are sending the request are the same.
+After this, open and execute the "update" Request. This call disables the second virtual machine. You should get a response containing on activity with the url "https://infrastructure.com/vm/cf091c5b-b529-43fc-b2d6-a3e70df7a258/deactivate". The UUID of the second machine is cf091c5b-b529-43fc-b2d6-a3e70df7a258.
