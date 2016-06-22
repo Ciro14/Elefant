@@ -7,4 +7,9 @@ Then download the actual jar file from the folder with the name ["target"](https
 
 You can start this service from your command line. Just type the Following command.
 
-`java -jar executionn-0.0.1-SNAPSHOT.jar``
+    java -jar execution-0.0.1-SNAPSHOT.jar
+
+This application uses the port 8080 by default. If already an other application listening on this port, you can specify the port using an additional parameter.
+
+    java -jar execution-0.0.1-SNAPSHOT.jar --server.port=1234
+
