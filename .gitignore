@@ -1,2 +1,5 @@
 *.class
 .idea/
+execution.service/
+planning/
+featuremodel/
