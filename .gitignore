@@ -1,6 +1,2 @@
 *.class
 .idea/
-execution.service/
-planning/
-utility/
-featuremodel/
