@@ -4,3 +4,5 @@ execution.service/
 planning/
 utility/
 featuremodel/
+target/
+featuremodel.service/
