@@ -1,6 +1,7 @@
 package de.uni_due.paluno.elefant.monitoring.service.controller;
 
 import de.uni_due.paluno.elefant.monitoring.service.model.Metric;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,10 +17,14 @@ import javax.validation.Valid;
 
 @RestController
 public class RESTController {
+
+    @Autowired
+    private MeasurementThread measurementThread;
+
     @RequestMapping(value = "/metrics",method = RequestMethod.POST,consumes = MediaType.APPLICATION_JSON_VALUE)
     public void metric(@RequestBody @Valid Metric[] metrics){
         for(Metric mp: metrics){
-            MeasurementThread.measure(mp);
+            measurementThread.measure(mp);
         }
     }
 }
