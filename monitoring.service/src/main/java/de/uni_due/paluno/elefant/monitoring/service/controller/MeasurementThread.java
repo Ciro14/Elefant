@@ -8,12 +8,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.management.MBeanServerConnection;
-import java.io.IOException;
+import java.io.*;
 import java.lang.management.ManagementFactory;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Timer;
-import java.util.TimerTask;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.ProtocolException;
+import java.net.URL;
+import java.util.*;
 
 /**
  * @author Ole Meyer
@@ -54,23 +55,24 @@ public class MeasurementThread extends Timer {
         this.timerTask=new TimerTask() {
             @Override
             public void run() {
-                //TODO Impement Http Call
-                double value=0;
-                MBeanServerConnection mbsc = ManagementFactory.getPlatformMBeanServer();
 
+                URL url = null;
                 try {
-                    OperatingSystemMXBean osMBean = ManagementFactory.newPlatformMXBeanProxy(
-                            mbsc, ManagementFactory.OPERATING_SYSTEM_MXBEAN_NAME, OperatingSystemMXBean.class);
-                    if(metric.getId().equals("cpu")){
-                       value=osMBean.getSystemCpuLoad()*100;
-                    }else if(metric.getId().equals("ram")){
-                        value= osMBean.getTotalPhysicalMemorySize()-osMBean.getFreePhysicalMemorySize();
-                    }
-                    Measurement measurement=new Measurement(metric.getId(),value);
+                    url = new URL(metric.getUrl());
+                    HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                    connection.setRequestMethod("GET");
+                    connection.setDoOutput(true);
+                    InputStream content = (InputStream)connection.getInputStream();
+                    BufferedReader br=new BufferedReader(new InputStreamReader(content));
+                    String response=br.readLine();
+                    br.close();
+                    double val=Double.valueOf(response);
+                    Measurement measurement=new Measurement(metric.getId(),val);
                     measurementRepository.insert(measurement);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
+
 
             }
         };
