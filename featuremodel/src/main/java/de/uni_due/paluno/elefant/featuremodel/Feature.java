@@ -5,7 +5,6 @@ import org.hibernate.validator.constraints.NotEmpty;
 import javax.validation.Valid;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.UUID;
 
 /**
  * @author Ole Meyer
@@ -14,7 +13,7 @@ import java.util.UUID;
 public class Feature {
 
     @NotEmpty
-    private String uuid;
+    private String id;
     @NotEmpty
     private String name;
     private boolean active;
@@ -51,12 +50,12 @@ public class Feature {
     }
 
 
-    public String getUuid() {
-        return uuid;
+    public String getId() {
+        return id;
     }
 
-    public void setUuid(String uuid) {
-        this.uuid = uuid;
+    public void setId(String id) {
+        this.id = id;
     }
 
     public List<FeatureConnection> getFeatureConnections() {

@@ -6,12 +6,14 @@ import org.apache.commons.csv.CSVRecord;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.URLConnection;
 import java.util.Base64;
 
 /**
@@ -24,6 +26,18 @@ public class Controller {
     private long lastTime;
     private long lastCount;
     private boolean firstRequest=true;
+
+    @RequestMapping(value = "responsetime")
+    public long getResponseTime() throws IOException {
+        long start=System.currentTimeMillis();
+        URL url = new URL("http://10.8.100.83/");
+        URLConnection conn = url.openConnection();
+        BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+        while (in.readLine() != null) {}
+        in.close();
+        long responsetime=System.currentTimeMillis()-start;
+        return responsetime;
+    }
 
     @RequestMapping(value = "/sessions")
     public double getSessions() throws IOException {

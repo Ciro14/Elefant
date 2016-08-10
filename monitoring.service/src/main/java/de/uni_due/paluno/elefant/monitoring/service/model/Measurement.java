@@ -15,10 +15,10 @@ public class Measurement {
     @Field("time")
     private long time;
 
-    public Measurement(String metricid, double value) {
+    public Measurement(String metricid, double value, long time) {
         this.metricid=metricid;
         this.value = value;
-        this.time=System.currentTimeMillis();
+        this.time=time;
     }
 
     public String getMetricid() {

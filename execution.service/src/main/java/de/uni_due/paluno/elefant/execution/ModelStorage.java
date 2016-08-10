@@ -44,7 +44,7 @@ public class ModelStorage {
     }
 
     private void recursiveIndex(Feature feature){
-        uuidToFeature.put(feature.getUuid(),feature);
+        uuidToFeature.put(feature.getId(),feature);
         for(FeatureConnection fc:feature.getFeatureConnections()){
             for(Feature f:fc.getFeatures())recursiveIndex(f);
         }
