@@ -1,0 +1,5 @@
+Knowledge Base
+
+This package contains the files to work with the stored information in MongoDB. It abstracts the way MongoDB and offers classes to work
+the stored information.
+
